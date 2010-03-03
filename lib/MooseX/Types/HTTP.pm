@@ -6,21 +6,28 @@ use Carp;
 
 use version; our $VERSION = qv('0.0.1');
 
-# Other recommended modules (uncomment to use):
-#  use IO::Prompt;
-#  use Perl6::Export;
-#  use Perl6::Slurp;
-#  use Perl6::Say;
 
-# Module implementation here
+use HTTP::Response;
+use HTTP::Request;
 
-1;    # Magic true value required at end of module
+use Moose::Util::TypeConstraints;
+
+use MooseX::Types::Moose qw{Str ScalarRef HashRef};
+use MooseX::Types::Path::Class qw{File Dir};
+
+use namespace::clean;
+
+use MooseX::Types -declare => [qw(HttpRequest HttpResponse)];
+
+class_type HttpRequest,  { class => "HTTP::Request" };
+class_type HttpResponse, { class => "HTTP::Response" };
+
+1;
 __END__
 
 =head1 NAME
 
-MooseX::Types::HTTP - [One line description of module's purpose here]
-
+MooseX::Types::HTTP - L<HTTP> related types and coercions for Moose
 
 =head1 VERSION
 
@@ -29,16 +36,43 @@ This document describes MooseX::Types::HTTP version 0.0.1
 
 =head1 SYNOPSIS
 
-    use MooseX::Types::HTTP;
+	use MooseX::Types::HTTP qw(HttpRequest HttpResponse);
 
 =head1 DESCRIPTION
 
+This package provides Moose types for HTTP::Response, and
+HTTP::Request, and related packaes as I get to them and need them
 
-=head1 SUBROUTINES/METHODS
+=head1 TYPES
 
+=over 4
+
+=item HttpRequest
+
+maps to   L<HTTP::Request>
+
+does not coerce at this time
+
+=item HttpResponse
+
+maps to   L<HTTP::Response>
+
+does not coerce at this time
+
+
+=back
+
+=head1 TODO
+
+everything else as I get to it.  I just fumbled around cpan and copied
+the approach from L<MooseX::Types::URI>
+
+=head1 VERSION CONTROL
+
+L<http://github.com/jmarca/moosex-types-http/>
 
 =head1 DIAGNOSTICS
-
+none
 
 =head1 CONFIGURATION AND ENVIRONMENT
 
@@ -47,7 +81,7 @@ MooseX::Types::HTTP requires no configuration files or environment variables.
 
 =head1 DEPENDENCIES
 
-None.
+L<HTTP::Request>, L<HTTP::Response>
 
 =head1 INCOMPATIBILITIES
 
@@ -57,11 +91,7 @@ None reported.
 
 No bugs have been reported.
 
-Please report any bugs or feature requests to
-C<bug-moosex-types-http@rt.cpan.org>, or through the web interface at
-L<http://rt.cpan.org>.  Or email them to me, as it is likely this will
-never get posted to CPAN.
-
+Please report any bugs or feature requests to github
 
 =head1 AUTHOR
 
