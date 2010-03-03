@@ -11,7 +11,7 @@ use Moose::Util::TypeConstraints;
 use  LWP::UserAgent;
 
 
-use ok 'MooseX::Types::HTTP'=> => qw(HttpRequest HttpResponse);
+use ok 'MooseX::Types::HTTP'=> qw(HttpRequest HttpResponse);
 
 
 ok defined &HttpRequest, 'HttpRequest' ;
