@@ -12,9 +12,6 @@ use HTTP::Request;
 
 use Moose::Util::TypeConstraints;
 
-use MooseX::Types::Moose qw{Str ScalarRef HashRef};
-use MooseX::Types::Path::Class qw{File Dir};
-
 use namespace::clean;
 
 use MooseX::Types -declare => [qw(HttpRequest HttpResponse)];
